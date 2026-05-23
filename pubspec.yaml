@@ -3,6 +3,7 @@ description: A pdf producer for Dart. It can create pdf files for both web or fl
 homepage: https://github.com/DavBfr/dart_pdf/tree/master/pdf
 repository: https://github.com/DavBfr/dart_pdf
 issue_tracker: https://github.com/DavBfr/dart_pdf/issues
+publish_to: "none"
 screenshots:
   - description: 'Example of a generated document'
     path: example.jpg
@@ -15,19 +16,21 @@ topics:
 version: 3.11.2
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ">=3.12.0 <4.0.0"
 
 dependencies:
-  archive: ^4.0.1
-  barcode: ">=2.2.8 <3.0.0"
-  bidi: ^2.0.12
-  crypto: ^3.0.6
-  image: ^4.5.0
-  meta: ">=1.15.0 <2.0.0"
+  archive: ^4.0.9
+  bidi: ^2.0.13
+  crypto: ^3.0.7
+  image:
+    git: https://github.com/kumsumit/image.git
+  meta: ">=1.18.2 <2.0.0"
   path_parsing: ">=1.1.0 <2.0.0"
-  vector_math: ^2.1.4
-  xml: ">=6.5.0 <7.0.0"
+  pretty_barcode:
+    git: https://github.com/kumsumit/pretty_barcode.git
+  vector_math: ^2.3.0
+  xml: ">=7.0.1"
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
-  test: ">=1.16.0 <2.0.0"
+  flutter_lints: ^6.0.0
+  test: ">=1.31.1"

@@ -37,7 +37,7 @@ class ClipRect extends SingleChildWidget {
 
     if (child != null) {
       final mat = Matrix4.identity();
-      mat.translate(box!.x, box!.y);
+      mat.translateByDouble(box!.x, box!.y, 0, 1);
       context.canvas
         ..saveContext()
         ..drawBox(box!)
@@ -50,11 +50,8 @@ class ClipRect extends SingleChildWidget {
 }
 
 class ClipRRect extends SingleChildWidget {
-  ClipRRect({
-    Widget? child,
-    this.horizontalRadius = 0,
-    this.verticalRadius = 0,
-  }) : super(child: child);
+  ClipRRect({Widget? child, this.horizontalRadius = 0, this.verticalRadius = 0})
+    : super(child: child);
 
   final double horizontalRadius;
   final double verticalRadius;
@@ -64,8 +61,14 @@ class ClipRRect extends SingleChildWidget {
     context.canvas
       ..setStrokeColor(PdfColors.deepPurple)
       ..setLineWidth(1)
-      ..drawRRect(box!.x, box!.y, box!.width, box!.height, horizontalRadius,
-          verticalRadius)
+      ..drawRRect(
+        box!.x,
+        box!.y,
+        box!.width,
+        box!.height,
+        horizontalRadius,
+        verticalRadius,
+      )
       ..strokePath();
   }
 
@@ -75,11 +78,17 @@ class ClipRRect extends SingleChildWidget {
 
     if (child != null) {
       final mat = Matrix4.identity();
-      mat.translate(box!.x, box!.y);
+      mat.translateByDouble(box!.x, box!.y, 0, 1);
       context.canvas
         ..saveContext()
-        ..drawRRect(box!.x, box!.y, box!.width, box!.height, horizontalRadius,
-            verticalRadius)
+        ..drawRRect(
+          box!.x,
+          box!.y,
+          box!.width,
+          box!.height,
+          horizontalRadius,
+          verticalRadius,
+        )
         ..clipPath()
         ..setTransform(mat);
       child!.paint(context);
@@ -112,7 +121,7 @@ class ClipOval extends SingleChildWidget {
 
     if (child != null) {
       final mat = Matrix4.identity();
-      mat.translate(box!.x, box!.y);
+      mat.translateByDouble(box!.x, box!.y, 0, 1);
       context.canvas
         ..saveContext()
         ..drawEllipse(box!.x + rx, box!.y + ry, rx, ry)

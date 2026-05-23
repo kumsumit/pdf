@@ -44,7 +44,7 @@ enum PdfLineJoin {
   round,
 
   /// The two segments shall be finished with butt caps and the resulting notch beyond the ends of the segments shall be filled with a triangle.
-  bevel
+  bevel,
 }
 
 /// Specify the shape that shall be used at the ends of open sub paths
@@ -57,7 +57,7 @@ enum PdfLineCap {
   round,
 
   /// The stroke shall continue beyond the endpoint of the path for a distance equal to half the line width and shall be squared off.
-  square
+  square,
 }
 
 /// Text rendering mode
@@ -84,19 +84,15 @@ enum PdfTextRenderingMode {
   fillStrokeAndClip,
 
   /// Add text to path for clipping
-  clip
+  clip,
 }
 
 @immutable
 class _PdfGraphicsContext {
-  const _PdfGraphicsContext({
-    required this.ctm,
-  });
+  const _PdfGraphicsContext({required this.ctm});
   final Matrix4 ctm;
 
-  _PdfGraphicsContext copy() => _PdfGraphicsContext(
-        ctm: ctm.clone(),
-      );
+  _PdfGraphicsContext copy() => _PdfGraphicsContext(ctm: ctm.clone());
 }
 
 /// Pdf drawing operations
@@ -383,8 +379,13 @@ class PdfGraphics {
   /// Draws an ellipse
   ///
   /// Use clockwise=false to draw the inside of a donut
-  void drawEllipse(double x, double y, double r1, double r2,
-      {bool clockwise = true}) {
+  void drawEllipse(
+    double x,
+    double y,
+    double r1,
+    double r2, {
+    bool clockwise = true,
+  }) {
     moveTo(x, y - r2);
     if (clockwise) {
       curveTo(x + _m4 * r1, y - r2, x + r1, y - _m4 * r2, x + r1, y);
@@ -434,8 +435,14 @@ class PdfGraphics {
     lineTo(x + w - rh, y);
     curveTo(x + _m4 * rh + w - rh, y, x + w, y - _m4 * rv + rv, x + w, y + rv);
     lineTo(x + w, y + h - rv);
-    curveTo(x + w, y + _m4 * rv + h - rv, x + _m4 * rh + w - rh, y + h,
-        x + w - rh, y + h);
+    curveTo(
+      x + w,
+      y + _m4 * rv + h - rv,
+      x + _m4 * rh + w - rh,
+      y + h,
+      x + w - rh,
+      y + h,
+    );
     lineTo(x + rh, y + h);
     curveTo(x - _m4 * rh + rh, y + h, x, y + _m4 * rv + h - rv, x, y + h - rv);
     lineTo(x, y + rv);
@@ -489,7 +496,8 @@ class PdfGraphics {
       if (_page.settings.verbose) {
         _buf.putString(' ' * math.max(0, _commentIndent - _buf.offset + o));
         _buf.putComment(
-            'setFont(${font.ref()}, size: $size, charSpace: $charSpace, wordSpace: $wordSpace, scale: $scale, mode: ${mode.name}, rise: $rise)');
+          'setFont(${font.ref()}, size: $size, charSpace: $charSpace, wordSpace: $wordSpace, scale: $scale, mode: ${mode.name}, rise: $rise)',
+        );
       }
       return true;
     }());
@@ -526,12 +534,15 @@ class PdfGraphics {
       return true;
     }());
 
-    setFont(font, size,
-        charSpace: charSpace,
-        mode: mode,
-        rise: rise,
-        scale: scale,
-        wordSpace: wordSpace);
+    setFont(
+      font,
+      size,
+      charSpace: charSpace,
+      mode: mode,
+      rise: rise,
+      scale: scale,
+      wordSpace: wordSpace,
+    );
 
     var o = 0;
     assert(() {
@@ -620,12 +631,19 @@ class PdfGraphics {
     }());
 
     if (color is PdfColorCmyk) {
-      PdfNumList(<double>[color.cyan, color.magenta, color.yellow, color.black])
-          .output(_page, _buf);
+      PdfNumList(<double>[
+        color.cyan,
+        color.magenta,
+        color.yellow,
+        color.black,
+      ]).output(_page, _buf);
       _buf.putString(' k ');
     } else {
-      PdfNumList(<double>[color!.red, color.green, color.blue])
-          .output(_page, _buf);
+      PdfNumList(<double>[
+        color!.red,
+        color.green,
+        color.blue,
+      ]).output(_page, _buf);
       _buf.putString(' rg ');
     }
 
@@ -650,12 +668,19 @@ class PdfGraphics {
     }());
 
     if (color is PdfColorCmyk) {
-      PdfNumList(<double>[color.cyan, color.magenta, color.yellow, color.black])
-          .output(_page, _buf);
+      PdfNumList(<double>[
+        color.cyan,
+        color.magenta,
+        color.yellow,
+        color.black,
+      ]).output(_page, _buf);
       _buf.putString(' K ');
     } else {
-      PdfNumList(<double>[color!.red, color.green, color.blue])
-          .output(_page, _buf);
+      PdfNumList(<double>[
+        color!.red,
+        color.green,
+        color.blue,
+      ]).output(_page, _buf);
       _buf.putString(' RG ');
     }
 
@@ -751,8 +776,14 @@ class PdfGraphics {
     }());
 
     final s = t.storage;
-    PdfNumList(<double>[s[0], s[1], s[4], s[5], s[12], s[13]])
-        .output(_page, _buf);
+    PdfNumList(<double>[
+      s[0],
+      s[1],
+      s[4],
+      s[5],
+      s[12],
+      s[13],
+    ]).output(_page, _buf);
     _buf.putString(' cm ');
     _context.ctm.multiply(t);
 
@@ -821,7 +852,13 @@ class PdfGraphics {
   /// using (x1,y1) as the control point at the beginning of the curve
   /// and (x2,y2) as the control point at the end of the curve.
   void curveTo(
-      double x1, double y1, double x2, double y2, double x3, double y3) {
+    double x1,
+    double y1,
+    double x2,
+    double y2,
+    double x3,
+    double y3,
+  ) {
     var o = 0;
     assert(() {
       if (_page.settings.verbose) {
@@ -859,8 +896,16 @@ class PdfGraphics {
     return c.sign == s.sign ? c : -c;
   }
 
-  void _endToCenterParameters(double x1, double y1, double x2, double y2,
-      bool large, bool sweep, double rx, double ry) {
+  void _endToCenterParameters(
+    double x1,
+    double y1,
+    double x2,
+    double y2,
+    bool large,
+    bool sweep,
+    double rx,
+    double ry,
+  ) {
     // See http://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes F.6.5
 
     rx = rx.abs();
@@ -895,8 +940,13 @@ class PdfGraphics {
     final cy = cyd + 0.5 * (y1 + y2);
 
     final theta = _vectorAngle(1, 0, (x1d - cxd) / rx, (y1d - cyd) / ry);
-    var dTheta = _vectorAngle((x1d - cxd) / rx, (y1d - cyd) / ry,
-            (-x1d - cxd) / rx, (-y1d - cyd) / ry) %
+    var dTheta =
+        _vectorAngle(
+          (x1d - cxd) / rx,
+          (y1d - cyd) / ry,
+          (-x1d - cxd) / rx,
+          (-y1d - cyd) / ry,
+        ) %
         (math.pi * 2.0);
     if (sweep == false && dTheta > 0.0) {
       dTheta -= math.pi * 2.0;
@@ -906,8 +956,14 @@ class PdfGraphics {
     _bezierArcFromCentre(cx, cy, rx, ry, -theta, -dTheta);
   }
 
-  void _bezierArcFromCentre(double cx, double cy, double rx, double ry,
-      double startAngle, double extent) {
+  void _bezierArcFromCentre(
+    double cx,
+    double cy,
+    double rx,
+    double ry,
+    double startAngle,
+    double extent,
+  ) {
     int fragmentsCount;
     double fragmentsAngle;
 
@@ -943,12 +999,13 @@ class PdfGraphics {
       c1 = math.cos(theta);
       s1 = math.sin(theta);
       curveTo(
-          cx + rx * (c0 - kappa * s0),
-          cy - ry * (s0 + kappa * c0),
-          cx + rx * (c1 + kappa * s1),
-          cy - ry * (s1 - kappa * c1),
-          cx + rx * c1,
-          cy - ry * s1);
+        cx + rx * (c0 - kappa * s0),
+        cy - ry * (s0 + kappa * c0),
+        cx + rx * (c1 + kappa * s1),
+        cy - ry * (s1 - kappa * c1),
+        cx + rx * c1,
+        cy - ry * s1,
+      );
     }
   }
 
@@ -958,8 +1015,16 @@ class PdfGraphics {
   /// the constraints imposed by the other parameters. large and sweep flags
   /// contribute to the automatic calculations and help determine how the arc is drawn.
   void bezierArc(
-      double x1, double y1, double rx, double ry, double x2, double y2,
-      {bool large = false, bool sweep = false, double phi = 0.0}) {
+    double x1,
+    double y1,
+    double rx,
+    double ry,
+    double x2,
+    double y2, {
+    bool large = false,
+    bool sweep = false,
+    double phi = 0.0,
+  }) {
     if (x1 == x2 && y1 == y2) {
       // From https://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes:
       // If the endpoints (x1, y1) and (x2, y2) are identical, then this is
@@ -976,7 +1041,7 @@ class PdfGraphics {
       // Our box bézier arcs can't handle rotations directly
       // move to a well known point, eliminate phi and transform the other point
       final mat = Matrix4.identity();
-      mat.translate(-x1, -y1);
+      mat.translateByDouble(-x1, -y1, 0, 1);
       mat.rotateZ(-phi);
       final tr = mat.transform3(Vector3(x2, y2, 0));
       _endToCenterParameters(0, 0, tr[0], tr[1], large, sweep, rx, ry);
@@ -1165,7 +1230,13 @@ class _PathProxy extends PathProxy {
 
   @override
   void cubicTo(
-      double x1, double y1, double x2, double y2, double x3, double y3) {
+    double x1,
+    double y1,
+    double x2,
+    double y2,
+    double x3,
+    double y3,
+  ) {
     canvas.curveTo(x1, y1, x2, y2, x3, y3);
   }
 
@@ -1203,7 +1274,13 @@ class _PathBBProxy extends PathProxy {
 
   @override
   void cubicTo(
-      double x1, double y1, double x2, double y2, double x3, double y3) {
+    double x1,
+    double y1,
+    double x2,
+    double y2,
+    double x3,
+    double y3,
+  ) {
     final tValues = <double>[];
     double a, b, c, t, t1, t2, b2ac, sqrtB2ac;
 
@@ -1251,14 +1328,15 @@ class _PathBBProxy extends PathProxy {
     for (final t in tValues) {
       final mt = 1 - t;
       _updateMinMax(
-          (mt * mt * mt * _pX) +
-              (3 * mt * mt * t * x1) +
-              (3 * mt * t * t * x2) +
-              (t * t * t * x3),
-          (mt * mt * mt * _pY) +
-              (3 * mt * mt * t * y1) +
-              (3 * mt * t * t * y2) +
-              (t * t * t * y3));
+        (mt * mt * mt * _pX) +
+            (3 * mt * mt * t * x1) +
+            (3 * mt * t * t * x2) +
+            (t * t * t * x3),
+        (mt * mt * mt * _pY) +
+            (3 * mt * mt * t * y1) +
+            (3 * mt * t * t * y2) +
+            (t * t * t * y3),
+      );
     }
     _updateMinMax(_pX, _pY);
     _updateMinMax(x3, y3);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export 'package:barcode/barcode.dart';
+export 'package:pretty_barcode/pretty_barcode_core.dart';
 
 export 'src/widgets/annotations.dart';
 export 'src/widgets/barcode.dart';
