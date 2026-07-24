@@ -24,7 +24,7 @@
     },
     {
       "name": "test",
-      "version": "1.31.1",
+      "version": "1.31.2",
       "dependencies": [
         "analyzer",
         "async",
@@ -71,7 +71,7 @@
     },
     {
       "name": "vector_math",
-      "version": "2.3.0",
+      "version": "2.4.1",
       "dependencies": []
     },
     {
@@ -93,7 +93,7 @@
     },
     {
       "name": "meta",
-      "version": "1.18.2",
+      "version": "1.19.0",
       "dependencies": []
     },
     {
@@ -161,7 +161,7 @@
     },
     {
       "name": "test_core",
-      "version": "0.6.18",
+      "version": "0.6.19",
       "dependencies": [
         "analyzer",
         "args",
@@ -188,7 +188,7 @@
     },
     {
       "name": "test_api",
-      "version": "0.7.12",
+      "version": "0.7.13",
       "dependencies": [
         "async",
         "boolean_selector",

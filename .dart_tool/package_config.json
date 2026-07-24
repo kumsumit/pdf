@@ -171,7 +171,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/meta-1.18.2",
+      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/meta-1.19.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -321,21 +321,21 @@
     },
     {
       "name": "test",
-      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/test-1.31.1",
+      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/test-1.31.2",
       "packageUri": "lib/",
-      "languageVersion": "3.10"
+      "languageVersion": "3.11"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/test_api-0.7.12",
+      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/test_api-0.7.13",
       "packageUri": "lib/",
-      "languageVersion": "3.10"
+      "languageVersion": "3.11"
     },
     {
       "name": "test_core",
-      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/test_core-0.6.18",
+      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/test_core-0.6.19",
       "packageUri": "lib/",
-      "languageVersion": "3.10"
+      "languageVersion": "3.11"
     },
     {
       "name": "typed_data",
@@ -345,9 +345,9 @@
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/vector_math-2.3.0",
+      "rootUri": "file:///Users/amitsharan/.pub-cache/hosted/pub.dev/vector_math-2.4.1",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.10"
     },
     {
       "name": "vm_service",
@@ -405,8 +405,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.12.0",
+  "generatorVersion": "3.12.2",
   "flutterRoot": "file:///Users/amitsharan/development/flutter",
-  "flutterVersion": "3.44.0",
+  "flutterVersion": "3.44.7",
   "pubCache": "file:///Users/amitsharan/.pub-cache"
 }
